@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+from scipy.spatial import distance
 
 yolov3_weights = "YOLOv3_model/yolov3.weights"
 yolov3_cfg = "YOLOv3_model/yolov3.cfg"
@@ -58,19 +59,36 @@ class objectDetector():
 
         colors = np.random.uniform(0, 255, size=(len(boxes), 3))
 
-        pixels_ratio_array = []
-
+        mid_points = []
+        bboxes = []
         for i, conf in zip(range(len(boxes)), confidences):
             if i in indexes:
                 x, y, w, h = boxes[i]
                 label = str(self.classes[class_ids[i]])
                 color = colors[i]
-                if label == 'person':
+                class_label = 'person'
+                if class_label:
                     text = label+ ' ' +str(round(conf, 2))
+                    mid_points.append([int(x+w/2), int(y+h/2)])
+                    bboxes.append([x, y, x+w, y+h])
                     if draw:
+                        cv2.circle(img, (int(x+w/2), int(y+h/2)), 5, (0, 0, 255), -1)
                         cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
                         cv2.putText(img, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.colorWhite, 1)
 
 
+        self.calDistance(len(class_label), mid_points)
         
         return img
+
+    def calDistance(self, n, mid_points):
+        d = np.zeros((n,n))
+        for i in range(n):
+            for j in range(i+1, n):
+                if i != j:
+                    dst = distance.euclidean(mid_points[i], mid_points[j])
+                    d[i][j] = dst            
+        return d
+
+    def redAlert(self):   
+        pass 
