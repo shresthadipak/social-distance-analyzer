@@ -70,14 +70,30 @@ class objectDetector():
                 if class_label:
                     text = label+ ' ' +str(round(conf, 2))
                     mid_points.append([int(x+w/2), int(y+h/2)])
-                    bboxes.append([x, y, x+w, y+h])
-                    if draw:
-                        cv2.circle(img, (int(x+w/2), int(y+h/2)), 5, (0, 0, 255), -1)
-                        cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
-                        cv2.putText(img, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.colorWhite, 1)
+                    bboxes.append([x, y, w, h])
+
+                    # if draw:
+                        # cv2.circle(img, (int(x+w/2), int(y+h/2)), 5, (0, 0, 255), -1)
+                        # cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
+                        # cv2.putText(img, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.colorWhite, 1)
 
 
-        self.calDistance(len(class_label), mid_points)
+        dist = self.calDistance(len(class_label), mid_points)
+
+        violate =  self.redAlert(dist)
+
+        for i, b in enumerate(bboxes):
+            x, y, w, h = b
+
+            color = (0, 255, 0)
+
+            if i in violate:
+                color = (0, 0, 255)
+
+            if draw:
+                cv2.circle(img, (int(x+w/2), int(y+h/2)), 5, color, -1)
+                cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
+                cv2.putText(img, f'Social Distance Violations: {len(violate)}', (10,30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
         
         return img
 
@@ -90,5 +106,13 @@ class objectDetector():
                     d[i][j] = dst            
         return d
 
-    def redAlert(self):   
-        pass 
+    def redAlert(self, dist):   
+        violate = set()
+        for i in range(0, dist.shape[0]):
+            for j in range(i+1, dist.shape[1]):
+                if dist[i, j] < 50.0:
+                    violate.add(i)
+                    violate.add(j)
+
+        return violate            
+ 
