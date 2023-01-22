@@ -1,7 +1,5 @@
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
-import math
 from scipy.spatial import distance
 
 yolov3_weights = "YOLOv3_model/yolov3.weights"
