@@ -78,6 +78,8 @@ class objectDetector():
 
         dist = self.calDistance(len(class_label), mid_points)
 
+        # print(dist)
+
         violate =  self.redAlert(dist)
 
         for i, b in enumerate(bboxes):
@@ -101,14 +103,14 @@ class objectDetector():
             for j in range(i+1, n):
                 if i != j:
                     dst = distance.euclidean(mid_points[i], mid_points[j])
-                    d[i][j] = dst            
+                    d[i][j] = dst                       
         return d
 
     def redAlert(self, dist):   
         violate = set()
         for i in range(0, dist.shape[0]):
             for j in range(i+1, dist.shape[1]):
-                if dist[i, j] < 50.0:
+                if dist[i, j] < 100.0:
                     violate.add(i)
                     violate.add(j)
 

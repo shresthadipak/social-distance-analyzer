@@ -12,7 +12,7 @@ scale_width = screen_res[0] / img.shape[1]
 scale_height = screen_res[1] / img.shape[0]
 scale = min(scale_width, scale_height)
 
-img = cv2.resize(img, (int(w/2 * scale), int(h/2 * scale)), cv2.INTER_AREA)
+img = cv2.resize(img, (int(w * scale), int(h * scale)), cv2.INTER_AREA)
 
 detector = objectDetector()
 
