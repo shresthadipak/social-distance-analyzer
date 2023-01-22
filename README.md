@@ -11,6 +11,7 @@ Social distance analyzer is used to analysis the distance between person during 
 
 # Results/ Output
 Image output: [Click here](/output/output1.png)  
+Video output: [Click here](/output/output2.avi)
 
 # License
 The MIT License (MIT). Please see [License File](/LICENSE) for more information.
