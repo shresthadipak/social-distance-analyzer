@@ -17,10 +17,8 @@ Image output: [Click here](/output/output1.png)
 Video output: [Click here](/output/output2.avi)
 
 # References
-1. [Social Distancing Analyzer Using Computer Vision
-and Deep Learning](https://iopscience.iop.org/article/10.1088/1742-6596/1916/1/012039/pdf)
-2. [OpenCV Social Distancing Detector
-](https://pyimagesearch.com/2020/06/01/opencv-social-distancing-detector/)
+1. [Social Distancing Analyzer Using Computer Vision and Deep Learning](https://iopscience.iop.org/article/10.1088/1742-6596/1916/1/012039/pdf)
+2. [OpenCV Social Distancing Detector](https://pyimagesearch.com/2020/06/01/opencv-social-distancing-detector/)
 
 # License
 The MIT License (MIT). Please see [License File](/LICENSE) for more information.
