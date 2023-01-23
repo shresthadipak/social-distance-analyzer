@@ -9,7 +9,7 @@ A social distance analyzer is a device or software that uses various technologie
     import numpy as np
     from scipy.spatial import distance
 
-# Steps for Socail Distance Analyzer
+# Steps for Social Distance Analyzer
 ![This is an image](/images/social_distance_detector_steps.webp)    
 
 # Results/ Output
